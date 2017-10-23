@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # sets root to pages/home and root_path, points about page to about_path
   root 'pages#home'
   get 'about', to: 'pages#about'
+  
+  resources :articles
   #get 'pages/home', to: 'pages#home'
   #get 'pages/about', to: 'pages#about'
 
