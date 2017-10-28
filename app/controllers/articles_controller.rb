@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
+  def index
+    @article_list = Article.all
+  end
+  
   def new
     @article = Article.new
+  end
+  
+  def edit
+    @article = Article.find(params[:id])
   end
   
   def create
@@ -14,7 +22,19 @@ class ArticlesController < ApplicationController
     else
       # failed validation, show error then render new or create tempmlate page again
       render 'new'   # or render :new
-    end
+    end  
+  end
+  
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)   #need the white-listed article_params
+      #show saved title and desc
+      flash[:notice] = "Article was successfully updated"
+      redirect_to article_path(@article)
+    else
+      # failed validation, show error then render edit tempmlate page again
+      render 'edit'   # or render :edit 
+    end 
   end
   
   def show
