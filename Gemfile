@@ -48,7 +48,7 @@ group :development do
 end
 
 group :production do
-  #Using HEROKU for production, so adding support for Postgres
-  gem 'pg'
+  #Using HEROKU for production, so adding support for Postgres; need to downgrade pg for production only
+  gem 'pg', '0.20.0'
   gem 'rails_12factor'
 end

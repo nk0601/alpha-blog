@@ -1,0 +1,23 @@
+The PGconn, PGresult, and PGError constants are deprecated, and will be
+removed as of version 1.0.
+
+You should use PG::Connection, PG::Result, and PG::Error instead, respectively.
+
+Called from /app/vendor/bundle/ruby/2.3.0/gems/activesupport-4.2.5/lib/active_support/dependencies.rb:240:in `load_dependency'
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDescriptionToArticles (20171023045040)
+  [1m[35m (4.5ms)[0m  BEGIN
+== 20171023045040 AddDescriptionToArticles: migrating =========================
+-- add_column(:articles, :description, :text)
+  [1m[36m (5.1ms)[0m  [1mALTER TABLE "articles" ADD "description" text[0m
+   -> 0.0056s
+-- add_column(:articles, :created_at, :datetime)
+  [1m[35m (4.8ms)[0m  ALTER TABLE "articles" ADD "created_at" timestamp
+   -> 0.0052s
+-- add_column(:articles, :updated_at, :datetime)
+  [1m[36m (3.6ms)[0m  [1mALTER TABLE "articles" ADD "updated_at" timestamp[0m
+   -> 0.0039s
+== 20171023045040 AddDescriptionToArticles: migrated (0.0155s) ================
+
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171023045040"]]
+  [1m[36m (4.5ms)[0m  [1mCOMMIT[0m
