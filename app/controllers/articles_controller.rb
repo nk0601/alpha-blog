@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     
     if @article.save
       #show saved title and desc
-      flash[:notice] = "Article was successfully created"
+      flash[:success] = "Article was successfully created"
       redirect_to article_path(@article)
     else
       # failed validation, show error then render new or create tempmlate page again
@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
   def update
     if @article.update(article_params)   #need the white-listed article_params
       #show saved title and desc
-      flash[:notice] = "Article was successfully updated"
+      flash[:success] = "Article was successfully updated"
       redirect_to article_path(@article)
     else
       # failed validation, show error then render edit tempmlate page again
@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
   
   def destroy
     @article.destroy
-    flash[:notice] = "Article was successfully deleted"
+    flash[:danger] = "Article was successfully deleted"
     redirect_to articles_path
   end
   
