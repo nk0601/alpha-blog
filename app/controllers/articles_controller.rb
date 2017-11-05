@@ -13,8 +13,12 @@ class ArticlesController < ApplicationController
   end
   
   def create
+    debugger
     #render plain: params[:article].inspect   #displays the params for testing
     @article = Article.new(article_params)   #call method article_params to retrieve the params[:article]
+    
+    #hardcoding user_id for now...
+    @article.user = User.first
     
     if @article.save
       #show saved title and desc
