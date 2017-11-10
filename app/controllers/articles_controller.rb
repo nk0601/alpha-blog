@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:edit, :update, :show, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def index
     @article_list = Article.paginate(page: params[:page], per_page: 5)
@@ -13,12 +15,12 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    debugger
+    #debugger
     #render plain: params[:article].inspect   #displays the params for testing
     @article = Article.new(article_params)   #call method article_params to retrieve the params[:article]
     
     #hardcoding user_id for now...
-    @article.user = User.first
+    @article.user = User.last
     
     if @article.save
       #show saved title and desc
@@ -58,4 +60,12 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :description)   #require from key :article the values for :title, :description
     end
+    
+    def require_same_user
+      if current_user != @article.user
+        flash[:danger] = "You can only edit or delete your own article"
+        redirect_to root_path
+      end
+    end
+    
 end
