@@ -19,8 +19,7 @@ class ArticlesController < ApplicationController
     #render plain: params[:article].inspect   #displays the params for testing
     @article = Article.new(article_params)   #call method article_params to retrieve the params[:article]
     
-    #hardcoding user_id for now...
-    @article.user = User.last
+    @article.user = current_user
     
     if @article.save
       #show saved title and desc
