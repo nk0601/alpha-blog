@@ -12,8 +12,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)     #whitelist what we're accepting, pass params hash
     if @user.save
-      flash[:success] = "Welcome to the alpha blog #{@user.username}"
-      redirect_to articles_path
+      session[:user_id] = @user.id
+      flash[:success] = "Welcome to the Alpha Blog #{@user.username}"
+      redirect_to user_path(@user)
     else
       render 'new'                # invalid user, then render new template again, display errors from renders partial
     end
