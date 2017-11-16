@@ -18,7 +18,6 @@ class ArticlesController < ApplicationController
     #debugger
     #render plain: params[:article].inspect   #displays the params for testing
     @article = Article.new(article_params)   #call method article_params to retrieve the params[:article]
-    
     @article.user = current_user
     
     if @article.save
@@ -57,7 +56,7 @@ class ArticlesController < ApplicationController
     end
     
     def article_params
-      params.require(:article).permit(:title, :description)   #require from key :article the values for :title, :description
+      params.require(:article).permit(:title, :description, category_ids: [])   #require from key :article the values for :title, :description
     end
     
     def require_same_user
